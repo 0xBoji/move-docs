@@ -1,0 +1,14 @@
+[package]
+name = "shakerGame"
+version = "1.0.0"
+authors = []
+
+[addresses]
+game = "your_adress"
+
+[dependencies]
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework/", rev="testnet"}
+AptosToken = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token/", rev="testnet"}
+
+
+[dev-dependencies]
