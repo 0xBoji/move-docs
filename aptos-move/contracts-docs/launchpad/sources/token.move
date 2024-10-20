@@ -3,7 +3,7 @@ module launchpad_addr::launchpad {
     use std::signer;
     use std::string::{Self, String};
     use std::vector;
-
+    use std::error;
     use aptos_std::table::{Self, Table};
 
     use aptos_framework::aptos_account;
@@ -32,6 +32,10 @@ module launchpad_addr::launchpad {
     const EMINT_IS_DISABLED: u64 = 9;
     /// Cannot mint 0 amount
     const ECANNOT_MINT_ZERO: u64 = 10;
+    /// Mint fee overflow
+    const EMINT_FEE_OVERFLOW: u64 = 11;
+
+    const MAX_U64: u128 = 18446744073709551615;
 
     /// Default to mint 0 amount to creator when creating FA
     const DEFAULT_PRE_MINT_AMOUNT: u64 = 0;
@@ -367,16 +371,15 @@ module launchpad_addr::launchpad {
     }
 
     #[view]
-    /// Get mint fee denominated in oapt (smallest unit of APT, i.e. 1e-8 APT)
     public fun get_mint_fee(
         fa_obj: Object<Metadata>,
-        // Amount in smallest unit of FA
         amount: u64,
-    ): u64 acquires FAConfig {
+    ) : u64 acquires FAConfig {
         let fa_config = borrow_global<FAConfig>(object::object_address(&fa_obj));
-        amount * fa_config.mint_fee_per_smallest_unit_of_fa
+        let fee = (amount as u128) * (fa_config.mint_fee_per_smallest_unit_of_fa as u128);
+        assert!(fee <= MAX_U64, error::invalid_argument(EMINT_FEE_OVERFLOW));
+        (fee as u64)
     }
-
     #[view]
     /// Is mint enabled for the fa
     public fun is_mint_enabled(fa_obj: Object<Metadata>): bool acquires FAConfig {
