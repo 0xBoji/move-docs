@@ -1,0 +1,9 @@
+---
+profiles:
+  launchpad:
+    network: Testnet
+    private_key: "0x352d0f363f72b62ae23711bc2ee57ef43b95f4824b6090876fe8d3c94d87ceba"
+    public_key: "0x24f0b97625cc4fd0be49600bbb6129bf30f9be641bb06fb574a088c52ee937c1"
+    account: d7805c990fe50efef595df50190f46adcf24a78345f3fa552908d0ba9c38f46c
+    rest_url: "https://fullnode.testnet.aptoslabs.com"
+    faucet_url: "https://faucet.testnet.aptoslabs.com"

@@ -4,9 +4,15 @@ version = "1.0.0"
 authors = []
 
 [addresses]
-message_board_addr = "0x662ff6b8d3ec62342ebe595b0ca2c4954a696156f4ec914ce2ff4bd09d82cc34"
+launchpad_addr = "0xd7805c990fe50efef595df50190f46adcf24a78345f3fa552908d0ba9c38f46c"
+initial_creator_addr = "0xd7805c990fe50efef595df50190f46adcf24a78345f3fa552908d0ba9c38f46c"
+std = "0x1"
+aptos_std = "0x1"
+aptos_framework = "0x1"
+aptos_token_objects = "0x4"
 
 [dependencies]
-AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", rev = "mainnet", subdir = "aptos-move/framework/aptos-framework" }
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir="aptos-move/framework/aptos-framework/", rev="main" }
+AptosToken = { git = "https://github.com/aptos-labs/aptos-core.git", subdir="aptos-move/framework/aptos-token/", rev="main" }
 
 [dev-dependencies]
